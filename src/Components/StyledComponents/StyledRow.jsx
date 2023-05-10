@@ -1,9 +1,9 @@
 import Row from "react-bootstrap/Row";
 import styled from "styled-components";
 
-const MyRow = styled(Row)`
+const StyledRow = styled(Row)`
     display: flex;
     flex: 100%; 
     `;
 
-export default MyRow;
+export default StyledRow;

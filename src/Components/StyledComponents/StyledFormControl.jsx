@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import styled from "styled-components";
 
-const MyFormControl = styled(Form.Control)`
+const StyledFormControl = styled(Form.Control)`
     background-color: ${(props) => props.theme.grayColor};
     border: none;
     border-radius: 8px;
@@ -21,4 +21,4 @@ const MyFormControl = styled(Form.Control)`
     }
 `;
 
-export default MyFormControl;
+export default StyledFormControl;

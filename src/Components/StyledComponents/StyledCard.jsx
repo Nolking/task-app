@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import styled from "styled-components";
 
-const MyCard = styled(Card)`
+const StyledCard = styled(Card)`
     background-color: white;
     height: auto;
     border: none;
@@ -19,4 +19,4 @@ const MyCard = styled(Card)`
     }
     `;
 
-export default MyCard;
+export default StyledCard;

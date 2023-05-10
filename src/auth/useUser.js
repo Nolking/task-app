@@ -18,17 +18,18 @@ export const useUser = () => {
         if (!token) {
             setUser(null);
         } 
-        localStorage.setItem(token, JSON.stringify(user));
     }, [user, token]);
 
-    const addTask = (task) => {
-        setUser((prevUser) => {
-            const newUser = {...prevUser};
-            newUser.tasks.push(task);
-            localStorage.setItem(token, JSON.stringify(user));
-        });
-    };
+    // const addTask = (task) => {
+    //     console.log(task)
+    //     setUser((prevUser) => {
+    //         console.log(prevUser)
+    //         const newUser = {...prevUser};
+    //         newUser.tasks.push(task);
+    //     });
+    //     localStorage.setItem(token, JSON.stringify(user));
+    // };
 
 
-    return [user, addTask];
+    return [user];
 }

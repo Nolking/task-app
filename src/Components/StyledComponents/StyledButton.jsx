@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import Button from "react-bootstrap/Button";
 
-const MyButton = styled(Button)`
+const StyledButton = styled(Button)`
     background-color: ${(props) => props.theme.primaryColor};
     color: white;
     border: none;
@@ -17,4 +17,4 @@ const MyButton = styled(Button)`
     }
 `;
 
-export default MyButton;
+export default StyledButton;

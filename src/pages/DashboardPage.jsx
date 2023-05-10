@@ -1,24 +1,42 @@
+import React, { useState } from "react";
 import { Row, Col, Card } from "react-bootstrap";
-import MyContainer from "../Components/MyContainer";
-import MyCard from "../Components/MyCard";
-import MyRow from "../Components/MyRow";
+
+import { StyledContainer, StyledCard, StyledRow, StyledButton } from "@/Components/index.js";
+import StyledMySearchBar from "../Components/StyledComponents/StyledMySearchBar";
 import { useUser } from "../auth/useUser";
 import { NavLink } from "react-router-dom";
-import MyButton from "../Components/MyButton";
+import NewTaskModal from "../modals/NewTaskModal";
+import { SearchIcon, TrashIcon, PenIcon } from "@/Components/Icons/index.js";
+import StyledMyTaskCompleted from "../Components/StyledComponents/StyledMyTaskCompleted";
+import StyledMyLatestCreatedTask from "../Components/StyledComponents/StyledMyLatestCreatedTask";
+import StyledMyGraph from "../Components/StyledComponents/StyledMyGraph";
+import StyledMyEditTaskList from "../Components/StyledComponents/StyledMyEditTaskList";
+
 
 const DashboardPage = () => {
-  const [user, addTask] = useUser();
-  console.log("user: ", user);
+  const [user] = useUser();
+  const [taskList, setTaskList] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const handleLogout = () => {
     sessionStorage.removeItem("token");
   };
-  const handleAddTask = () => {
-    console.log("addTask");
+  const handleNewTask = (taskName) => {
+    setShowModal(false);
+    if (taskName.length === 0) return;
+    setTaskList([...taskList, { task: taskName, completed: false }]);
+    
   };
+  const handleAddTask = () => {
+    setShowModal(true);
+  };
+ 
   return (
-    <MyContainer>
+    <StyledContainer className={taskList.length === 0 ? "empty-list":""}>
       <header>
-        <MyRow className="justify-content-md-center" style={{flex: "0 0 100%"}}>
+        <StyledRow
+          className="justify-content-md-center"
+          style={{ flex: "0 0 100%" }}
+        >
           <Col xs="1" md="1" lg="1" />
           <Col xs="5" className="text-start">
             {user.name}
@@ -29,54 +47,47 @@ const DashboardPage = () => {
             </NavLink>
           </Col>
           <Col xs="1" md="1" lg="1" />
-        </MyRow>
+        </StyledRow>
       </header>
-      {user.tasks.length > 0 && (
-        <MyRow className="justify-content-md-center">
+      {taskList.length > 0 && (
+        <section className="task-section" style={{display: "flex", flex: "0 0 100%", flexWrap: "wrap", overflow: "hidden"}}>
+        <StyledRow className="justify-content-md-center">
           <Col xss="0" xs="0" sm="0" md="1" lg="1" />
           <Col>
-            <MyRow>
-              <Col xss="12" xs="12" sm="12">
-                <MyCard>
-                  <Card.Title className="card-title">Task Completed</Card.Title>
-                </MyCard>
-              </Col>
-              <Col xss="12" xs="12" sm="12">
-                <MyCard>
-                  <Card.Title className="card-title">
-                    Latest Created Tasks
-                  </Card.Title>
-                </MyCard>
-              </Col>
-              <Col xss="12" xs="12" sm="12">
-                <MyCard>Graph</MyCard>
-              </Col>
-            </MyRow>
+            <StyledRow>
+              <StyledMyTaskCompleted taskList={taskList}> </StyledMyTaskCompleted>
+              <StyledMyLatestCreatedTask taskList={taskList}> </StyledMyLatestCreatedTask>
+              <StyledMyGraph taskList={taskList}> </StyledMyGraph>
+            </StyledRow>
           </Col>
-          <Col xss="0" xs="0" sm="0" md="1" lg="1" />
-        </MyRow>
+          <Col xss="0" md="1" />
+        </StyledRow>
+        </section>
       )}
-
-      {user.tasks.length > 0 &&
-        user.tasks.map((task, index) => {
-          return <MyCard key={index}>{task}</MyCard>;
-        })}
-      {user.tasks.length === 0 && (
-        <Col xs="12" md="4" lg="4" style={{alignSelf: "baseline"}}>
-          <MyCard>
+      <Col xs="1"></Col>
+      <Col xs="10">
+        {taskList.length > 0 && (
+          <StyledMyEditTaskList taskList={taskList} onAddTask={handleAddTask} />
+        )}
+      </Col>
+      <Col xs="1"></Col>
+      {taskList.length === 0 && (
+        <Col xs="12" md="4" lg="4" style={{ alignSelf: "baseline" }}>
+          <StyledCard>
             <Card.Title className="card-title text-center">
               You have no tasks.
             </Card.Title>
-            <MyButton
+            <StyledButton
               style={{ maxWidth: "124px", alignSelf: "center" }}
               onClick={handleAddTask}
             >
               + New Task
-            </MyButton>
-          </MyCard>
+            </StyledButton>
+          </StyledCard>
         </Col>
       )}
-    </MyContainer>
+      {showModal && <NewTaskModal isOpen={showModal} onClose={handleNewTask} />}
+    </StyledContainer>
   );
 };
 

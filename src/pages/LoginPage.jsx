@@ -19,6 +19,16 @@ const LogInPage = () => {
     const form = event.currentTarget;
     const userId = form.userId.value;
     const userName = form.userName.value;
+    const onlyNumberRegex = /^[0-9]*$/;
+    if (!userId.match(onlyNumberRegex)) {
+      setErrorMessage("Id must be a number")
+      return;
+    }
+    const noSpacesRegex = /^[^\s]*$/;
+    if (!userId.match(noSpacesRegex) || !userName.match(noSpacesRegex)) {
+      setErrorMessage("Id and username must not contain spaces")
+      return;
+    }
     if (!localStorage.getItem(userId)) {
       const newUser = {name: userName};
       localStorage.setItem(userId, JSON.stringify(newUser));

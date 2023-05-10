@@ -24,6 +24,7 @@ const StyledContainer = styled(MyContainer)`
     justify-content: center;
     flex-wrap: wrap;
     display: flex;
+    background-color: #F4F4F6;
   }
 `;
 

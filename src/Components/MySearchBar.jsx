@@ -9,12 +9,14 @@ const MySearchBar = ({ onSearch, className}) => {
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-  const handleClick = () => {
-    onSearch(search);
-  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+        onSearch(search);
+    }
+    };
   return (
     <div className={`search-bar ${className}`}>
-      <a onClick={handleClick}>
+      <a onClick={() => onSearch(search)}>
         <SearchIcon />
       </a>
       <StyledInput
@@ -22,6 +24,7 @@ const MySearchBar = ({ onSearch, className}) => {
         placeholder="Search by task name"
         value={search}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
     </div>
   );

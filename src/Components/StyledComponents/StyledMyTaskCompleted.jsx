@@ -1,19 +1,26 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
 import Col from "react-bootstrap/Col";
+import { Skeleton } from "antd";
 import Card from "react-bootstrap/Card";
 import StyledCard from "./StyledCard";
 import { breakpoints } from "../../utils/breakpoints";
-const MyTaskCompleted = ({ className, taskList }) => {
+const MyTaskCompleted = ({ className, taskList, loading }) => {
   return (
     <Col className={className} xss="12" md="4">
-      <StyledCard>
-        <Card.Title className="card-title">Task Completed</Card.Title>
-        <div className="task-completed-count">
-          <span>{taskList.filter((el) => el.completed === true).length} </span>
-          <span>/ {taskList.length}</span>
-        </div>
-      </StyledCard>
+      {loading ? (
+        <Skeleton active />
+      ) : (
+        <StyledCard>
+          <Card.Title className="card-title">Task Completed</Card.Title>
+          <div className="task-completed-count">
+            <span>
+              {taskList.filter((el) => el.completed === true).length}{" "}
+            </span>
+            <span>/ {taskList.length}</span>
+          </div>
+        </StyledCard>
+      )}
     </Col>
   );
 };
@@ -50,12 +57,16 @@ const StyledMyTaskCompleted = styled(MyTaskCompleted)`
   }
 
   @media (min-width: ${breakpoints.xs}) and (max-width: ${breakpoints.md}) {
-    margin-top: 12px; 
-    .card { border-radius: 0;}
+    margin-top: 12px;
+    .card {
+      border-radius: 0;
+    }
   }
 
   @media (min-width: ${breakpoints.md}) {
     margin-top: 22px;
+    padding-right: 12px;
+    padding-left: 10px;
   }
 `;
 export default StyledMyTaskCompleted;

@@ -16,9 +16,7 @@ const LogInPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event)
     const form = event.currentTarget;
-    console.log(form)
     const userId = form.userId.value;
     const userName = form.userName.value;
     if (!localStorage.getItem(userId)) {

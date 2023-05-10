@@ -22,7 +22,7 @@ header {
   /* padding: 0 27px 0 24px; */
   align-items: center;
 }
-.empty-list .content-wrapper {flex: 0 0 100%; position: inherit !important;}
+.empty-list .content-wrapper {flex: 0 0 100%; position: inherit !important; }
 .empty-list header { position: absolute; top: 0;}
 .text-center {
   text-align: center;
@@ -42,11 +42,12 @@ header {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #00000033;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.control-col {padding: 0px;}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
